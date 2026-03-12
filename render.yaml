@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: fisiomanager-mail-gateway
+    runtime: python
+    plan: free
+    rootDir: .
+    buildCommand: pip install -r requirements_gateway.txt
+    startCommand: python3 tools/mail_gateway_server.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: MAIL_GATEWAY_API_KEY
+        sync: false
+      - key: MAIL_GMAIL_SENDER
+        sync: false
+      - key: MAIL_GMAIL_APP_PASSWORD
+        sync: false
